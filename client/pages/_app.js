@@ -1,12 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import buildClient from '../api/build-client';
+import Header from '../components/header';
 
 // next js wraps our components with _apps.js component
 // so we apply css library here
 
 const AppComponent = ({ Component, pageProps, currentUser }) => {
   return <div> 
-    <h1>{currentUser.email}</h1>
+    <Header currentUser={currentUser}/>
     <Component {...pageProps} />
   </div>;
 };
