@@ -3,7 +3,8 @@ import { body } from 'express-validator';
 import {
   validateRequest,
   requireAuth,
-  NotAuthorizedError
+  NotAuthorizedError,
+  NotFoundError
 } from '@tickster/common';
 import { Ticket } from '../models/ticket';
 
@@ -26,20 +27,19 @@ router.put('/api/tickets/:id',
   const ticket = await Ticket.findById(req.params.id);
 
   if (!ticket) {
-    // should throw NotFoundError
-    res.sendStatus(404);
+    throw new NotFoundError();
   }
 
-  if (ticket!.userId !== req.currentUser!.id) {
+  if (ticket.userId !== req.currentUser!.id) {
     throw new NotAuthorizedError();
   }
 
-  ticket!.set({
+  ticket.set({
     title: req.body.title,
     price: req.body.price
   });
 
-  await ticket!.save();
+  await ticket.save();
   res.send(ticket);
 });
 
