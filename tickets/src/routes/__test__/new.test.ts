@@ -1,7 +1,8 @@
 import request from 'supertest';
-import { resolveTripleslashReference } from 'typescript';
 import { app } from '../../app';
 import { Ticket } from '../../models/ticket';
+
+jest.mock('../../nats-wrapper');
 
 it('has a route handler listening to /api/tickets for post requests', async () => {
   const response = await request(app)
