@@ -52,5 +52,4 @@ it('returns an error if a user tries to fetch order of another order', async () 
     .set('Cookie', global.signin())
     .send()
     .expect(401);
-
 });
