@@ -71,7 +71,7 @@ it('returns a 204 with valid inputs', async () => {
     version: 0,
     price: 20,
     status: OrderStatus.Created
-  })
+  });
 
   await order.save();
 
